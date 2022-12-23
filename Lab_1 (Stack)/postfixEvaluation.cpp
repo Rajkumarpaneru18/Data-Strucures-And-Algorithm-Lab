@@ -19,7 +19,7 @@ int postfixEvaluation(string s)
             st.pop();
             int op1 = st.top();
             st.pop();
-
+        //applying the switch case for differation operation
             switch (s[i])
             {
             case '+':

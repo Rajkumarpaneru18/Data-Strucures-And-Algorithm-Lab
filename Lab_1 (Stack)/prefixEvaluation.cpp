@@ -21,6 +21,7 @@ int prefixEvaluation(string s)
             st.pop();
             int op2 = st.top();
             st.pop();
+            //applying the switch case for differation operation
             switch (s[i])
             {
             case '+':

@@ -72,6 +72,7 @@ int main()
 
     do
     {
+        //option
         cout << "Enter the option that you want to do." << endl;
         cout << "1.Push Into The Stack."
              << "2.Pop From The Stack "
@@ -98,4 +99,7 @@ int main()
             break;
         }
     } while (choice != 5);
+    
+    return 0;
+
 }

@@ -11,6 +11,7 @@ bool isValid(string s)
 
     for (int i = 0; i < n; i++)
     {
+        
         if (s[i] == '(' or s[i] == '[' or s[i] == '{')
         {
             st.push(s[i]);
@@ -52,6 +53,7 @@ bool isValid(string s)
             }
         }
     }
+    //checking the stack is empty or not
     if (!st.empty())
     {
         return false;
@@ -64,6 +66,7 @@ int main()
     string s;
     cout << "Enter any expression :" << endl;
     getline(cin, s);
+    //checking the validity of the parenthesis
     if (isValid(s))
     {
         cout << "The expression is balanced parenthesis." << endl;

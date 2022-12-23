@@ -17,7 +17,7 @@ print it
 #include <stack>
 #include <math.h>
 using namespace std;
-
+//checking the precedance of the operator
 int checkPrecedance(char c)
 {
     if (c == '^')

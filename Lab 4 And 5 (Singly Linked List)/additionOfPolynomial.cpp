@@ -1,4 +1,11 @@
-/* program to add the two given polynomial equation using linked list*/
+/* program to add the two given polynomial equation using linked list
+Adding two polynomial ie.
+Polynomial1:
+2x^4+3x^3+1x^1+
+Polynomial2 :
+5x^3+3x^2+5x^1+
+The result is:
+2x^4+8x^3+3x^2+6x^1+*/
 
 #include <iostream>
 using namespace std;
@@ -9,7 +16,7 @@ struct Node
     int exponent;
     Node *next;
 };
-
+// creating new Node
 Node *creatNode(int coff, int expo)
 {
     Node *newNode = new Node();
@@ -18,7 +25,7 @@ Node *creatNode(int coff, int expo)
     newNode->next = NULL;
     return newNode;
 }
-
+// function to add two polynomial
 Node *addPolynomial(Node *poly1, Node *poly2)
 {
     Node *result = NULL, *tail = NULL, *temp1, *temp2;
@@ -32,10 +39,11 @@ Node *addPolynomial(Node *poly1, Node *poly2)
         if (temp1->exponent > temp2->exponent)
         {
             node = creatNode(temp1->cofficient, temp1->exponent);
+
             temp1 = temp1->next;
         }
 
-        if (temp2->exponent > temp1->exponent)
+        else if (temp2->exponent > temp1->exponent)
         {
             node = creatNode(temp2->cofficient, temp2->exponent);
             temp2 = temp2->next;
@@ -58,6 +66,7 @@ Node *addPolynomial(Node *poly1, Node *poly2)
             tail = tail->next;
         }
     }
+
     while (temp1 != NULL)
     {
         Node *node = creatNode(temp1->cofficient, temp1->exponent);
@@ -74,16 +83,18 @@ Node *addPolynomial(Node *poly1, Node *poly2)
     }
     return result;
 }
-
+// printing the polynomial equation
 void printPolynomial(Node *poly)
 {
     while (poly != NULL)
     {
-        cout << poly->cofficient << "x^" << poly->exponent << "+";
+        cout << "+" << poly->cofficient << "x^" << poly->exponent;
         poly = poly->next;
     }
     cout << endl;
 }
+
+// main function
 int main()
 {
     Node *poly1 = NULL, *poly2 = NULL, *result = NULL;
@@ -96,14 +107,18 @@ int main()
     poly2->next = creatNode(3, 2);
     poly2->next->next = creatNode(5, 1);
 
+    // polynomail 1
+
     cout << "Polynomial1: " << endl;
     printPolynomial(poly1);
 
+    // polynomial 2
     cout << "Polynomial2 : " << endl;
     printPolynomial(poly2);
 
+    // adding two polynomial
     result = addPolynomial(poly1, poly2);
-
+    // displaying result
     cout << "The result is: " << endl;
     printPolynomial(result);
     return 0;

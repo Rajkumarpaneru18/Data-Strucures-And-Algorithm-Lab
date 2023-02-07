@@ -18,6 +18,7 @@ public:
     }
 };
 Node *head = NULL;
+// insertion at begining
 void insertAtBegining(int val)
 {
 
@@ -29,7 +30,8 @@ void insertAtBegining(int val)
     }
     head = newNode;
 }
-void insetAtEnd(int newIteam)
+// insertion at end
+void insertAtEnd(int newIteam)
 {
     Node *n = new Node(newIteam);
 
@@ -41,58 +43,120 @@ void insetAtEnd(int newIteam)
     temp->next = n;
     n->prev = temp;
 }
-void insertionAfterSpecificNode(Node *prevNode, int val)
-{
-    if (prevNode == NULL)
-    {
-        cout << "Previous node cannot be NULL" << endl;
-        return;
-    }
-
-    Node *newNode = new Node(val);
-    newNode->prev = prevNode;
-    newNode->next = prevNode->next;
-    prevNode->next = newNode;
-
-    if (newNode->next != NULL)
-        newNode->next->prev = newNode;
-}
-
-void insertBeforeSpecificNode(Node *Before, int val)
-{
-    if (Before == NULL)
-    {
-        cout << "Before Node can not be NULL" << endl;
-        return;
-    }
-    Node *newNode = new Node(val);
-    newNode->next = Before;
-    newNode->prev = Before->prev;
-    Before->prev = newNode;
-
-    if (newNode->prev != NULL)
-    {
-        newNode->prev->next = newNode;
-    }
-}
-void display()
+// insert before
+void insertBeforeSpecificNode(int before, int val)
 {
     Node *temp = head;
+    while (temp->data != before)
+    {
+        temp = temp->next;
+    }
+    Node *newNode = new Node(val);
+    temp->prev->next = newNode;
+    newNode->next = temp;
+    temp->prev->prev = newNode->prev;
+}
+// insertion after
+void insertionAfterSpecificNode(int after, int val)
+{
+    Node *temp = head;
+    while (temp->data != after)
+    {
+        temp = temp->next;
+    }
+    Node *newNode = new Node(val);
+    newNode->next = temp->next;
+    newNode->prev = temp;
+    temp->next->prev = newNode;
+    temp->next = newNode;
+}
+// delete From beginning
+void deleteFromBegining()
+{
+    Node *temp = head;
+    head = temp->next;
+    head->prev = NULL;
+    Node *toDelete = temp;
+    delete toDelete;
+}
+// delete after
+void deleteAfterSpecificNode(int after)
+{
+    Node *temp = head;
+
+    while (temp->data != after)
+    {
+        temp = temp->next;
+    }
+    Node *toDelete = temp->next;
+    temp->next = temp->next->next;
+    temp->next->prev = temp;
+    delete toDelete;
+}
+// delete before
+void deleteBeforeSpecificNode(int before)
+{
+    Node *temp = head;
+    while (temp->data != before)
+    {
+        temp = temp->next;
+    }
+    Node *toDelete = temp->prev;
+    temp->prev = temp->prev->prev;
+    if (temp->prev != NULL)
+        temp->prev->next = temp;
+    delete toDelete;
+}
+// delete from end
+void deleteFromEnd()
+{
+    Node *temp = head;
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+    Node *toDelete = temp;
+    temp->prev->next = NULL;
+    temp->prev = temp->prev->prev;
+    delete toDelete;
+}
+// display Node data
+void display()
+{
+
+    Node *temp = head;
+    if (temp == NULL)
+    {
+        cout << "NULL" << endl;
+    }
 
     while (temp != NULL)
     {
         cout << temp->data << "<->";
         temp = temp->next;
     }
+    cout << endl;
 }
 int main()
 {
-    insertAtBegining(1);
+    insertAtBegining(3);
     insertAtBegining(2);
-    insetAtEnd(3);
-    insetAtEnd(4);
-    insertionAfterSpecificNode(head->next, 5);
-    insertBeforeSpecificNode(head->next->next, 6);
+    insertAtBegining(1);
+    insertAtEnd(4);
     display();
+    insertBeforeSpecificNode(3, 5);
+    display();
+    insertionAfterSpecificNode(3, 6);
+    display();
+    deleteFromBegining();
+    display();
+    deleteFromEnd();
+    display();
+
+    deleteAfterSpecificNode(5);
+    display();
+    deleteBeforeSpecificNode(6);
+    display();
+
     return 0;
 }
